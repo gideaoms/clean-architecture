@@ -1,12 +1,16 @@
-import { UserRepository } from "../../../core/repositories/repository";
-import { UserModel } from "../../../core/models/model";
+import { UserRepository } from "../../../core/repositories/repository.js";
+import { User } from "../../../core/models/model.js";
 
 export class Repository implements UserRepository {
-  async create(user: UserModel.Model) {
-    return UserModel.build({ ...user });
+  async create(user: User.Model) {
+    return User.build({ ...user });
   }
 
   async findMany() {
     return [];
+  }
+
+  async update(user: User.Model) {
+    return User.build({ ...user });
   }
 }

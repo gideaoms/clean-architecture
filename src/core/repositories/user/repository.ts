@@ -1,6 +1,7 @@
-import { user } from "../../models/model";
+import { User } from "../../models/model.js";
 
 export type Repository = {
-  create(user: user.Model): Promise<user.Model>;
-  findMany(): Promise<user.Model[]>;
+  create(user: User.Model): Promise<User.Model>;
+  findMany(): Promise<User.Model[]>;
+  update(user: User.Model): Promise<User.Model>;
 };

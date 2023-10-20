@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import { Type } from "@sinclair/typebox";
-import { UseCase } from "../../../../core/use-cases/user/create/use-case";
-import { UserRepository } from "../../../repositories/repository";
+import { UseCase } from "../../../../core/use-cases/user/create/use-case.js";
+import { UserRepository } from "../../../repositories/repository.js";
 
 const repositories = { user: new UserRepository() };
 const useCase = new UseCase(repositories);
