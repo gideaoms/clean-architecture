@@ -3,7 +3,7 @@ import { User } from "../../../core/models/model.js";
 
 export class Repository implements UserRepository {
   async create(user: User.Model) {
-    return User.build({ ...user });
+    return User.model({ ...user });
   }
 
   async findMany() {
@@ -11,6 +11,6 @@ export class Repository implements UserRepository {
   }
 
   async update(user: User.Model) {
-    return User.build({ ...user });
+    return User.model({ ...user });
   }
 }

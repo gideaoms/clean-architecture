@@ -15,14 +15,14 @@ export type Json = {
 };
 
 export function toActive(model: Model, status: Status) {
-  return { ...model, status: status } satisfies Model;
+  return { ...model, status } satisfies Model;
 }
 
 export function isActive(model: Model) {
   return model.status === "active";
 }
 
-export function empty(): Model {
+export function empty() {
   return {
     id: "",
     name: "",
@@ -31,7 +31,7 @@ export function empty(): Model {
   } satisfies Model;
 }
 
-export function build(user: Partial<Model>) {
+export function model(user: Partial<Model>) {
   const { id, name, email, status } = empty();
   return {
     id: user.id ?? id,

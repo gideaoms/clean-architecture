@@ -5,7 +5,7 @@ export class UseCase {
   constructor(private readonly repositories: { user: UserRepository }) {}
 
   async exec(name: string, email: string) {
-    const user1 = User.build({
+    const user1 = User.model({
       name,
       email,
       status: "active",
