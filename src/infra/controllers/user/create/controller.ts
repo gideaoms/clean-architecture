@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import { Type } from "@sinclair/typebox";
-import * as services from "../../core/services/mod";
-import * as repositories from "../repositories/mod";
+import { UseCase } from "../../../../core/use-cases/user/create/use-case";
+import { UserRepository } from "../../../repositories/repository";
 
-const userRepository = new repositories.user.Repository();
-const userService = new services.user.Service(userRepository);
+const repositories = { user: new UserRepository() };
+const useCase = new UseCase(repositories);
 
 export default async function controller(fastify: FastifyInstance) {
   fastify.withTypeProvider<TypeBoxTypeProvider>().route({
@@ -19,17 +19,8 @@ export default async function controller(fastify: FastifyInstance) {
     },
     async handler(request, replay) {
       const { name, email } = request.body;
-      const createdUser = await userService.create(name, email);
-      replay.code(201).send(createdUser);
-    },
-  });
-
-  fastify.withTypeProvider<TypeBoxTypeProvider>().route({
-    url: "/users",
-    method: "GET",
-    async handler(request, replay) {
-      const users = await userService.findMany();
-      replay.code(200).send(users);
+      const user = await useCase.exec(name, email);
+      replay.code(201).send(user);
     },
   });
 }
